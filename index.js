@@ -26,6 +26,7 @@ bot.on('message', async (msg) => {
         max_tokens: 1000,
         messages: [{ role: "user", content: msg.text}],
     });
-    
+
+    console.log(completion.data)
     bot.sendMessage(chatId, completion.data.choices[0].message);
 });
