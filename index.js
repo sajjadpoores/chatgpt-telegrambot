@@ -29,7 +29,7 @@ bot.on('message', async (msg) => {
         bot.sendMessage(chatId, 'Robot is in rapper mode now');
     }
     else if (msg.text === "Normal person") {
-        mode = "normal";
+        mode = "Normal person";
         bot.sendMessage(chatId, 'Robot is in normal mode now');
     }
     else {
