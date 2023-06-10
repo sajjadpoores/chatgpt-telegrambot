@@ -19,6 +19,7 @@ bot.on('message', async (msg) => {
         apiKey: process.env.OPENAI_KEY,
     });
     const openai = new OpenAIApi(configuration);
+    bot.sendChatAction(chatId, 'typing')
 
     const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
@@ -28,6 +29,5 @@ bot.on('message', async (msg) => {
     });
 
     console.log(completion.data.choices[0].message)
-    bot.sendChatAction(chatId, 'typing')
     bot.sendMessage(chatId, completion.data.choices[0].message.content);
 });
