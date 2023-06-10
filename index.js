@@ -13,7 +13,14 @@ console.log('the chatgpt telegram bot is running....')
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
 
-    if (msg.text === "angry") {
+    if (msg.text === "/mode") {
+        bot.sendMessage(msg.chat.id, "Who you want me to act like?", {
+            "reply_markup": {
+                "keyboard": [["Rapper"], ["angry man"]]
+            }
+        });
+    }
+    else if (msg.text === "angry") {
         mode = "angry";
         bot.sendMessage(chatId, 'Robot is in angry mode now');
     }
@@ -52,15 +59,5 @@ bot.on('message', async (msg) => {
         console.log(completion.data.choices[0].message)
         bot.sendMessage(chatId, completion.data.choices[0].message.content);
     }
-
-});
-
-bot.onText(/\/mode/, (msg) => {
-
-    bot.sendMessage(msg.chat.id, "Who you want me to act lie?", {
-        "reply_markup": {
-            "keyboard": [["Rapper"], ["angry man"]]
-        }
-    });
 
 });
