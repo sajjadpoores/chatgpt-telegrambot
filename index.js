@@ -28,5 +28,5 @@ bot.on('message', async (msg) => {
     });
 
     console.log(completion.data.choices[0].message)
-    bot.sendMessage(chatId, completion.data.choices[0].message);
+    bot.sendMessage(chatId, completion.data.choices[0].message.content);
 });
