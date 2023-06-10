@@ -9,8 +9,23 @@ const token = process.env.TELEGRAM_KEY;
 const bot = new TelegramBot(token, { polling: true });
 
 console.log('the chatgpt telegram bot is running....')
-bot.on('message', (msg) => {
+bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-    // send a message to the chat acknowledging receipt of their message
-    bot.sendMessage(chatId, msg.text);
+
+
+    const { Configuration, OpenAIApi } = require("openai");
+
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
+
+    const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        temperature: 0,
+        max_tokens: 1000,
+        messages: [{ role: "user", content: msg.text}],
+    });
+    
+    bot.sendMessage(chatId, completion.data.choices[0].message);
 });
