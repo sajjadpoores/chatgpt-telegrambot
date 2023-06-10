@@ -24,7 +24,7 @@ bot.on('message', async (msg) => {
         model: "gpt-3.5-turbo",
         temperature: 0,
         max_tokens: 1000,
-        messages: [{ role: "user", content: msg.text}],
+        messages: [{ role: "system", content: 'You are a jungle man. You must response in a very angry mood everytime.' }, { role: "user", content: msg.text }],
     });
 
     console.log(completion.data.choices[0].message)
