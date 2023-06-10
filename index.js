@@ -27,6 +27,6 @@ bot.on('message', async (msg) => {
         messages: [{ role: "user", content: msg.text}],
     });
 
-    console.log(completion.data)
+    console.log(completion.data.choices[0].message)
     bot.sendMessage(chatId, completion.data.choices[0].message);
 });
