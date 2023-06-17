@@ -33,7 +33,7 @@ bot.on('message', async (msg) => {
         mode = dbUser.mode
     }
     else {
-        let dbUser = await db.model('User').create({ chatId, mode })
+        dbUser = await db.model('User').create({ chatId, mode })
     }
 
     if (msg.text === "/mode") {
@@ -52,13 +52,13 @@ bot.on('message', async (msg) => {
     else if (msg.text === "Rapper") {
         mode = "Rapper";
         bot.sendMessage(chatId, 'Robot is in rapper mode now');
-        await dbUser.save()
-    }
+        dbUser.mode = mode
+        await dbUser.save()    }
     else if (msg.text === "Normal person") {
         mode = "Normal person";
         bot.sendMessage(chatId, 'Robot is in normal mode now');
-        await dbUser.save()
-    }
+        dbUser.mode = mode
+        await dbUser.save()    }
     else {
         const { Configuration, OpenAIApi } = require("openai");
 
