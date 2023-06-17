@@ -1,6 +1,21 @@
 require('dotenv').config();
-let mode = 'Normal person';
+const mongoose = require("mongoose");
 const TelegramBot = require('node-telegram-bot-api');
+
+mongoose.connect('mongodb://127.0.0.1:27017/telegrambot');
+const db = mongoose.connection.useDb(`telegrambot`, {
+    useCache: true
+});
+// Need to register models every time a new connection is created
+if (!db.models['User']) {
+    db.model('User', mongoose.Schema({ chatId: String, mode: { type: String, default: 'Normal person' } }));
+}
+
+
+db.model('User').find().
+    then(users => console.log(users)).
+    catch(err => res.status(500).json({ message: err.message }));
+
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = process.env.TELEGRAM_KEY;
@@ -11,7 +26,15 @@ const bot = new TelegramBot(token, { polling: true });
 console.log('the chatgpt telegram bot is running....')
 
 bot.on('message', async (msg) => {
+    let mode = 'Normal person';
     const chatId = msg.chat.id;
+    let dbUser = await db.model('User').findOne({ chatId })
+    if (dbUser) {
+        mode = dbUser.mode
+    }
+    else {
+        let dbUser = await db.model('User').create({ chatId, mode })
+    }
 
     if (msg.text === "/mode") {
         bot.sendMessage(msg.chat.id, "Who you want me to act like?", {
@@ -23,18 +46,20 @@ bot.on('message', async (msg) => {
     else if (msg.text === "Angry man") {
         mode = "Angry man";
         bot.sendMessage(chatId, 'Robot is in angry mode now');
+        dbUser.mode = mode
+        await dbUser.save()
     }
     else if (msg.text === "Rapper") {
         mode = "Rapper";
         bot.sendMessage(chatId, 'Robot is in rapper mode now');
+        await dbUser.save()
     }
     else if (msg.text === "Normal person") {
         mode = "Normal person";
         bot.sendMessage(chatId, 'Robot is in normal mode now');
+        await dbUser.save()
     }
     else {
-
-
         const { Configuration, OpenAIApi } = require("openai");
 
         const configuration = new Configuration({
