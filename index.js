@@ -53,12 +53,14 @@ bot.on('message', async (msg) => {
         mode = "Rapper";
         bot.sendMessage(chatId, 'Robot is in rapper mode now');
         dbUser.mode = mode
-        await dbUser.save()    }
+        await dbUser.save()
+    }
     else if (msg.text === "Normal person") {
         mode = "Normal person";
         bot.sendMessage(chatId, 'Robot is in normal mode now');
         dbUser.mode = mode
-        await dbUser.save()    }
+        await dbUser.save()
+    }
     else {
         const { Configuration, OpenAIApi } = require("openai");
 
