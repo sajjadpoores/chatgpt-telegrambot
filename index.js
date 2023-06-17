@@ -14,7 +14,7 @@ if (!db.models['User']) {
 
 db.model('User').find().
     then(users => console.log(users)).
-    catch(err => res.status(500).json({ message: err.message }));
+    catch(err => console.log(err));
 
 
 // replace the value below with the Telegram token you receive from @BotFather
