@@ -10,7 +10,6 @@ services:
       - 3000:3000
     networks:
       - poores
-    environment:
 
 networks:
   poores:
