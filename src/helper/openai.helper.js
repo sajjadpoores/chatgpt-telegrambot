@@ -5,7 +5,7 @@ const configuration = new Configuration({
     apiKey: process.env.OPENAI_KEY,
 });
 
-const createChatCompletion = async (prmopt) => {
+const createChatCompletion = async (prmopt, msg) => {
     const openai = new OpenAIApi(configuration);
 
     const completion = await openai.createChatCompletion({
