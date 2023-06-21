@@ -3,7 +3,7 @@ const openAiHelper = require('../helper/openai.helper')
 const handleMessage = (async (bot, msg) => {
     const chatId = msg.chat.id;
 
-    let user = await User.find({ chatId });
+    let user = await User.findOne({ chatId });
     if (!user) {
         user = new User({
             chatId,
