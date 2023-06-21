@@ -41,7 +41,7 @@ const handleMessage = (async (bot, msg) => {
             angry: 'I want you to act like a very angry person that knows everything but response in a very angry way.'
         }
 
-        const answer = await openAiHelper.createChatCompletion(modeMap[user.mode] || 'normal', msg.text)
+        const answer = await openAiHelper.createChatCompletion(modeMap[user.mode] || modeMap['normal'], msg.text)
         bot.sendMessage(chatId, answer);
     }
 })
