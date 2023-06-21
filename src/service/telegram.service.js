@@ -10,6 +10,8 @@ const handleMessage = (async (bot, msg) => {
             chatId,
             mode: 'normal'
         })
+
+        await user.save();
     }
 
     if (msg.text === "/mode") {
