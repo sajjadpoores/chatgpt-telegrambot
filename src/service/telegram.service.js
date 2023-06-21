@@ -3,14 +3,13 @@ const openAiHelper = require('../helper/openai.helper')
 const handleMessage = (async (bot, msg) => {
     const chatId = msg.chat.id;
 
-    console.log(User)
     let user = await User.find({ chatId });
     if (!user) {
         user = new User({
             chatId,
             mode: 'normal'
-        })
-
+        });
+        console.log(user)
         await user.save();
     }
 
@@ -24,17 +23,17 @@ const handleMessage = (async (bot, msg) => {
     else if (msg.text === "angry") {
         bot.sendMessage(chatId, 'Angry mode activated.')
         user.mode = 'angry'
-        await User.updateOne({_id: user._id}, {$set: {mode: 'angry'}})
+        await User.updateOne({ _id: user._id }, { $set: { mode: 'angry' } })
     }
     else if (msg.text === "rapper") {
         bot.sendMessage(chatId, 'Rapper mode activated.')
         user.mode = 'rapper'
-        await User.updateOne({_id: user._id}, {$set: {mode: 'rapper'}})
+        await User.updateOne({ _id: user._id }, { $set: { mode: 'rapper' } })
     }
     else if (msg.text === 'normal') {
         bot.sendMessage(chatId, 'Normal mode activated.')
         user.mode = 'normal'
-        await User.updateOne({_id: user._id}, {$set: {mode: 'normal'}})
+        await User.updateOne({ _id: user._id }, { $set: { mode: 'normal' } })
     }
     else {
         const modeMap = {
