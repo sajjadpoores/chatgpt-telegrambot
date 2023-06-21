@@ -20,9 +20,9 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
             console.error(err.stack);
             res.status(500).send('Something went wrong!');
         });
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => console.log(`Listening on port ${port}...`));
     })
     .catch(err => console.error('Could not connect to MongoDB...'));
 
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
