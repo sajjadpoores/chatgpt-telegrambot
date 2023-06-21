@@ -8,14 +8,20 @@ const configuration = new Configuration({
 const createChatCompletion = async (prmopt, msg) => {
     const openai = new OpenAIApi(configuration);
 
-    const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        temperature: 1,
-        max_tokens: 1000,
-        messages: [{ role: "system", content: prmopt }, { role: "user", content: msg.text }],
-    });
+    try {
+        const completion = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            temperature: 1,
+            max_tokens: 1000,
+            messages: [{ role: "system", content: prmopt }, { role: "user", content: msg.text }],
+        });
 
-    return completion.data.choices[0].message.content
+        return completion.data.choices[0].message.content
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error('INTERNAL SERVER ERROR')
+    }
 }
 
 module.exports = { createChatCompletion }
