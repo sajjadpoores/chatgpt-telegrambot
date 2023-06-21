@@ -12,8 +12,6 @@ services:
       - poores
     environment:
       - MONGO_URL=mongodb://mongo:27017/telegrambot
-    depends_on:
-      - mongo
 
 networks:
   poores:
