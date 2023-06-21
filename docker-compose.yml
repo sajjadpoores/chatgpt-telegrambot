@@ -11,7 +11,7 @@ services:
     networks:
       - poores
     environment:
-      - MONGO_URL:mongodb://mongo:27017/telegrambot
+      - MONGO_URL=mongodb://mongo:27017/telegrambot
 networks:
   poores:
-    external: true
+    driver: bridge
