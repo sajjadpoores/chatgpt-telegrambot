@@ -10,7 +10,8 @@ services:
       - 3000:3000
     networks:
       - poores
-
+    environment:
+      - MONGO_URL:mongodb://mongo:27017/telegrambot
 networks:
   poores:
     external: true
