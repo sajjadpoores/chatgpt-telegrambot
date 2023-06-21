@@ -22,17 +22,17 @@ const handleMessage = (async (bot, msg) => {
     else if (msg.text === "angry") {
         bot.sendMessage(chatId, 'Angry mode activated.')
         user.mode = 'angry'
-        user.save()
+        await User.updateOne({_id: user._id}, {$set: {mode: 'angry'}})
     }
     else if (msg.text === "rapper") {
         bot.sendMessage(chatId, 'Rapper mode activated.')
         user.mode = 'rapper'
-        user.save()
+        await User.updateOne({_id: user._id}, {$set: {mode: 'rapper'}})
     }
     else if (msg.text === 'normal') {
         bot.sendMessage(chatId, 'Normal mode activated.')
         user.mode = 'normal'
-        user.save()
+        await User.updateOne({_id: user._id}, {$set: {mode: 'normal'}})
     }
     else {
         const modeMap = {
