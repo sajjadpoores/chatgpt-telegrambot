@@ -16,7 +16,7 @@ const handleMessage = (async (bot, msg) => {
     if (msg.text === "/mode") {
         bot.sendMessage(chatId, "Who you want me to act like?", {
             "reply_markup": {
-                "keyboard": [["Rapper"], ["angry"], ["normal"]]
+                "keyboard": [["rapper"], ["angry"], ["normal"]]
             }
         });
     }
