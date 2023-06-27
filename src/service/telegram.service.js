@@ -16,7 +16,7 @@ const handleMessage = (async (bot, msg) => {
     if (msg.text === "/mode") {
         bot.sendMessage(chatId, "Who you want me to act like?", {
             "reply_markup": {
-                "keyboard": [["Rapper"], ["Angry man"], ["Normal person"]]
+                "keyboard": [["Rapper"], ["angry"], ["normal"]]
             }
         });
     }
@@ -37,7 +37,7 @@ const handleMessage = (async (bot, msg) => {
     }
     else {
         const modeMap = {
-            normal: 'you are a wise person, answer user text',
+            normal: 'you are a wise person, answer user question',
             rapper: 'I want you to act as a rapper. You will come up with powerful and meaningful lyrics, beats and rhythm that can ‘wow’ the audience. Your lyrics should have an intriguing meaning and message which people can relate too. When it comes to choosing your beat, make sure it is catchy yet relevant to your words, so that when combined they make an explosion of sound everytime!',
             angry: 'I want you to act like a very angry person that knows everything but response in a very angry way.'
         }
