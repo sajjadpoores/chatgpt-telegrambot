@@ -31,7 +31,7 @@ const handleMessage = (async (bot, msg) => {
         await User.updateOne({ _id: user._id }, { $set: { mode: msg.text } });
     }
     else {
-        const answer = await openAiHelper.createChatCompletion(mode.prompt || 'you are a wise person, answer user question', msg.text)
+        const answer = await openAiHelper.createChatCompletion(mode?.prompt || 'you are a wise person, answer user question', msg.text)
         bot.sendMessage(chatId, answer);
     }
 })
