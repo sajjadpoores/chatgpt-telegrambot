@@ -27,8 +27,8 @@ const handleMessage = (async (bot, msg) => {
     }
     else if (mode) {
         bot.sendMessage(chatId, msg.text + ' mode activated.')
-        user.mode = aimode.mode;
-        await User.updateOne({ _id: user._id }, { $set: { mode: msg.text } });
+        user.mode = mode.mode;
+        await User.updateOne({ _id: user._id }, { $set: { mode: mode.mode } });
     }
     else {
         const answer = await openAiHelper.createChatCompletion(mode?.prompt || 'you are a wise person, answer user question', msg.text)
